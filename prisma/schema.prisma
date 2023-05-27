@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Rounds {
+  id        String   @id @default(uuid())
+  roundName String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  hands     Hands[]
+}
+
+model Hands {
+  id         String   @id @default(uuid())
+  handP1     String   @db.VarChar(255)
+  handP2     String   @db.VarChar(255)
+  handStatus String   @db.VarChar(255)
+  createdAt  DateTime @default(now())
+
+  Rounds   Rounds? @relation(fields: [roundsId], references: [id])
+  roundsId String?
+}
+
+model Weight {
+  id        String   @id @default(uuid())
+  handName  String   @db.VarChar(255)
+  weight    Int
+  createdAt DateTime @default(now())
+}
