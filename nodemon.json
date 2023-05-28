@@ -3,8 +3,5 @@
         "src"
     ],
     "ext": "ts",
-    "exec": "ts-node ./src/server.ts",
-    "execMap": {
-        "js": "node -r sucrase/register"
-    }
+    "exec": "ts-node ./src/server.ts"
 }
